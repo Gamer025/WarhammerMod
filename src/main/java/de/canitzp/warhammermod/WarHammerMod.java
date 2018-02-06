@@ -20,6 +20,7 @@ public class WarHammerMod {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
         LOG.info("[PreInit] Loading " + NAME + " v" + VERSION);
+        Registry.preInit(event);
     }
 
 }
