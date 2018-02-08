@@ -5,6 +5,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -35,6 +36,13 @@ public class Registry {
         if(openSkill.isPressed()){
             Minecraft.getMinecraft().displayGuiScreen(new GuiSkills());
         }
+    }
+
+    @SubscribeEvent
+    public void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event){
+        HereGamer hereGamer = new HereGamer();
+        event.player.registerExtendedProperties("Skills", hereGamer);
+        HereGamer.playerData.put(event.player, hereGamer);
     }
 
 }
