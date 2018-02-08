@@ -26,6 +26,5 @@ public class GuiSkills extends GuiScreen {
         this.drawTexturedModalRect(this.guiLeft, this.guiLeft, 256, 256, 0, 0);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
-        //test
     }
 }
