@@ -13,6 +13,9 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.network.NetworkManager;
 import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.input.Keyboard;
+import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.event.*;
 
 /**
  * @author canitzp
@@ -39,10 +42,12 @@ public class Registry {
     }
 
     @SubscribeEvent
-    public void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event){
-        HereGamer hereGamer = new HereGamer();
-        event.player.registerExtendedProperties("Skills", hereGamer);
-        HereGamer.playerData.put(event.player, hereGamer);
-    }
+    public void entityConstruct(EntityEvent.EntityConstructing event) {
+        if (event.entity instanceof EntityPlayer) {
+            HereGamer hereGamer = new HereGamer();
+            event.entity.registerExtendedProperties("Skills", hereGamer);
+            HereGamer.playerData.put(((EntityPlayer)event.entity), hereGamer);
+        }
+        }
 
 }
