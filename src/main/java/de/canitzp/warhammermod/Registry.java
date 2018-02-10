@@ -5,17 +5,14 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.network.NetworkManager;
-import net.minecraftforge.common.MinecraftForge;
-import org.lwjgl.input.Keyboard;
-import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.event.*;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityEvent;
+import org.lwjgl.input.Keyboard;
 
 /**
  * @author canitzp
