@@ -1,12 +1,14 @@
 package de.canitzp.warhammermod;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,16 +22,23 @@ public class HereGamer implements IExtendedEntityProperties{
 
     public int skillXP, skillS, skillP, skillE, skillC, skillI, skillA, skillL;
 
+    public static HereGamer get(Entity p) {
+        return (HereGamer) p.getExtendedProperties("Skills");
+    }
+    public static void register() {
+        MinecraftForge.EVENT_BUS.register(new Handler());
+    }
+
     @Override
     public void saveNBTData(NBTTagCompound data) {
-        data.setInteger("SkillXp", 0);
-        data.setInteger("SkillS", 0);
-        data.setInteger("SkillP", 0);
-        data.setInteger("SkillE", 0);
-        data.setInteger("SkillC", 0);
-        data.setInteger("SkillI", 0);
-        data.setInteger("SkillA", 0);
-        data.setInteger("SkillL", 0);
+        data.setInteger("SkillXp", skillXP);
+        data.setInteger("SkillS", skillS);
+        data.setInteger("SkillP", skillP);
+        data.setInteger("SkillE", skillE);
+        data.setInteger("SkillC", skillC);
+        data.setInteger("SkillI", skillI);
+        data.setInteger("SkillA", skillA);
+        data.setInteger("SkillL", skillL);
     }
 
     @Override
@@ -48,4 +57,15 @@ public class HereGamer implements IExtendedEntityProperties{
     public void init(Entity entity, World world) {
 
     }
+
+public static class Handler {
+    @SubscribeEvent
+    public void onClonePlayer(PlayerEvent.Clone e) {
+        if (e.wasDeath) {
+            NBTTagCompound compound = new NBTTagCompound();
+            HereGamer.get(e.original).saveNBTData(compound);
+            HereGamer.get(e.entityPlayer).loadNBTData(compound);
+                }
+            }
+        }
 }
